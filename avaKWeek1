@@ -1,0 +1,72 @@
+let bg, x, y, hue, textsize, x2, y2, x3, y3;
+var imgs = [];
+
+function preload() {
+  bg = loadImage('assets/ava.jpg');
+  frog = loadImage('assets/frog.png');
+}
+
+function setup() {
+  createCanvas(600, 600);
+
+  noStroke();
+  colorMode(HSB);
+
+  for (var i = 0; i < 10; i++) {
+    imgs[i] = new Images(width / 2, height / 2);
+  }
+
+}
+
+function draw() {
+
+  background(bg);
+  text("Click to add more!", 20, 60);
+ 
+  for (var i = 0; i < imgs.length; i++) {
+    imgs[i].update();
+    imgs[i].display();
+    imgs[i].bounce();
+  }
+
+
+}
+
+function mousePressed() {
+  // with each mouse press, craa new ball at mouse location
+  // this ball is added to the array
+  imgs.push(new Images(mouseX, mouseY));
+}
+
+
+
+function Images(x, y) {
+  this.x = x;
+  this.y = y;
+  this.sz = 100;
+  this.xspeed = random(-7, 7);
+  this.yspeed = random(-7, 7);
+
+  this.update = function() {
+    this.x += this.xspeed;
+    this.y += this.yspeed;
+  };
+
+  this.display = function() {
+  fill(hue, 255, 255, 255);
+  textSize(50);
+  hue = random(200,255);
+  text("AVA", this.x, this.y);
+    image(frog, this.x, this.y, this.sz, this.sz);
+  };
+
+  this.bounce = function() {
+    if (this.x > width || this.x < 0) {
+      this.xspeed *= -1;
+    }
+    if (this.y > height || this.y < 0) {
+      this.yspeed *= -1;
+    }
+  }
+
+}
