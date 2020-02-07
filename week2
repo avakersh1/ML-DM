@@ -1,0 +1,86 @@
+//link: https://editor.p5js.org/Kersa689/sketches/F7eJ1jdg
+
+/* Modeled from 
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+*/
+
+class agent {
+  constructor(id, x, y) {
+    this.id = id; // this data comes from the parameter
+    this.xPos = x;
+    this.yPos = y;
+    this.appleX = 100;
+    this.appleY =100;
+    this.appleSize = 50;
+    this.size = 100; // this data is a constant, every instantiation will be size 100.
+    this.food = ["bananas", "chocolate", "apples"]
+  }
+  
+
+draw(){
+    fill(200);
+    rect(this.xPos,this.yPos, this.size, this.size);
+  
+  fill(255,0,0);
+     ellipse(this.appleX, this.appleY,this.appleSize,this.appleSize); 
+}
+  
+     showFood() {
+    // The easy way
+    text(this.food, 30,30);
+    // The more controlled way
+    let foodString = this.food.join(", ");
+    text(foodString, 30,60);
+       
+       ellipse(this.appleX, this.appleY, this.appleSize,this.appleSize); 
+  }
+  
+//////ADDING OBJECTS IN THE WORLD/////////
+  
+  /* Adding apples into the environment
+      - The apples cannot be smelled 
+      - the player finds them if they enter that space
+      - There are only so many apples and the 'tree' will then have to grow more after a cirtain amount of time. 
+      -if the new apples are not found in time they go bad and hurt the player's health
+  */
+  enterApple(x,y) {
+    return (x >= this.appleX && x < this.appleX+this.appleSize && y >= this.appleY && y < this.appleY+this.appleSize)
+  } 
+//check if the player is on the apple
+  
+//   if (player enters apple) {
+//   playerHealth = playerHealth + 5;
+//   }
+//      timer(); //add a timer function
+  
+//  if (timer > 30 && player enters apple){ 
+//    playerHealth = playerHealth - 5;
+// 
+//  if (timer > 50){
+//  ellipse(1000,1000,appleSize, appleSize); 
+//   }
+  
+//  if (timer > 100){
+//  ellipse(this.appleX, this.appleY, this.appleSize,     this.appleSize);
+//   }
+  
+  inside(x,y) {
+    return (x >= this.xPos && x < this.xPos+this.size && y >= this.yPos && y < this.yPos+this.size)
+  }
+}
+
+let agent007;
+
+function setup() {
+  createCanvas(400, 400);
+  agent007 = new agent(7, width / 2, height / 2);
+  print(agent007);
+  print(agent007.xPos);
+
+}
+
+function draw() {
+  background(230);
+  agent007.draw();
+  text(agent007.inside(mouseX, mouseY),width/2,height/2);
+}
