@@ -1,0 +1,70 @@
+// I used IceCream instead of students
+
+class IceCream {
+  constructor(flavor, topping, holder) {
+    this.flavor = flavor;
+    this.topping = topping;
+    this.holder = holder;
+    this.choices = [];
+  }
+
+  addIceCream(classId) {
+    this.choices.push(classId);
+    print(this.choices);
+  }
+
+  soldOut() {
+    return (this.choices.length == 0);
+  }
+
+  displayIC() {
+    this.choices.forEach(aClass => print(aClass));
+  }
+
+
+  draw(x, y) {
+    text(this.flavor, x, y);
+    text(this.topping, x, y + textSize());
+    text(this.holder, x, y + 2 * textSize());
+
+  }
+
+}
+
+let chocolate;
+let vanilla;
+let strawberry;
+let rockRoad;
+let raspberry;
+let cherry;
+
+function setup() {
+  createCanvas(400, 400);
+  chocolate = new IceCream("Chocolate", "Rainbow Sprinkles", "Cone");
+  vanilla = new IceCream("Vanilla", "Caramel", "Cup");
+  strawberry = new IceCream("Strawberry", "No Toppings", "Cone");
+  rockyRoad = new IceCream("Rocky Road", "Gummy Bears", "Cup");
+  raspberry = new IceCream("Raspberry", "No Toppings", "Cone");
+  cherry = new IceCream("Cherry","Chocolate Sprinkles", "Cone");
+
+  print(chocolate);
+  print(vanilla);
+  print(strawberry);
+  print(rockyRoad);
+  print(raspberry);
+  print(cherry);
+  
+
+}
+
+function draw() {
+  let y = 30;
+  background(220);
+  vanilla.draw(width/4-50, y);
+  chocolate.draw(width/4-50, y+50);
+  strawberry.draw(width/4-50, y+100);
+  rockyRoad.draw(width/2+10, y);
+  raspberry.draw(width/2+10, y+50);
+  cherry.draw(width/2+10,y+100);
+
+}
